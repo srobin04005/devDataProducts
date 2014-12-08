@@ -14,10 +14,7 @@ date: December 12, 2014
 ![Datsun 710](datsun710.jpg)
 
 ***
-<<<<<<< HEAD
-=======
 
->>>>>>> origin/gh-pages
 At 70s AutoMotors we are continuely searching for better ways to serve our valuable customers.  The MPG Explorer &copy; implements a simple linear regression model that allows users to find a vehicle that best matches their MPG requirements.  
 
 
