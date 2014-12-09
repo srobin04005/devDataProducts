@@ -20,13 +20,18 @@ At 70s AutoMotors we are continuely searching for better ways to serve our valua
 
 <span style="font-size:22px;font-style: italic;">MPG Explorer &copy; 2014</span>
 
-Introduction
+Using the Application
 ========================================================
 type: intro
+<small>For our customers to use this application it must be intuitive and simple.  I believe you will see that this needs little introduction and minimal instructions.
+</small>
 
 ![screenshot](mpg.jpg)
-***
+
 [Click here to Go to the Application](http://rsrobinett.shinyapps.io/devDataProducts)  
+***
+
+
 
 Using the sliders in the left panel. 
 
@@ -47,23 +52,23 @@ How it works
 ========================================================
 type:analysis
 
-_The linear regression model uses the vehicles in stock (__mtcars__) as the dataset.  *mpg* is the dependent variable; number of cylinders, horsepower, weight and rear drive gear are used as the predictors._  
-* lm1 <- lm(mpg~as.numeric(cyl)+hp+wt+drat, data=dataset)  
+The linear regression model uses the vehicles in stock (__mtcars__) as the dataset.  *mpg* is the dependent variable (the thing we are predicting); number of cylinders, horsepower, weight and rear drive gear are used as the predictors.   
+
+* **lm1 <- lm(mpg~as.numeric(cyl)+hp+wt+drat, data=dataset)**   
 
 _values are derived from the slider input_
-* pred <- data.frame(cyl=input$cyl,hp=input$hp,wt=input$wt,drat=input$drat)  
+* **pred <- data.frame(cyl=input$cyl,hp=input$hp,wt=input$wt,drat=input$drat)**    
 
 _prediction is created with the predict function_ 
-* prd <- predict(lm1, pred, interval="confidence")
+* **prd <- predict(lm1, pred, interval="confidence")**  
 
-Since this is a prototype, we have intentionally keep this simple and have already found confidence levels to be less than optimal.  
+Since this is a prototype, we have intentionally keep this simple and have already found confidence levels to be too wide.  
 
 
 ```
     fit   lwr   upr
 1 23.81 21.33 26.29
 ```
-<small>Future implementations will include transmission type, elapsed time through the quarter mile, and staff are collecting additional data for number of cup holders,</small>   
 
 
 Evaluation of the model
@@ -72,10 +77,21 @@ type:illustration
 
 ### Residuals
 ![plot of chunk unnamed-chunk-2](index-figure/unnamed-chunk-2.png) 
+<small>Residuals appear to be biased and heteroscedastic.  Not exactly what we want, but close enough for our application.</small>
+
 ***
 
 ### Standard Errors
-7.441, 0.635, 0.013, 0.8182, 1.3868  
+
+<table>
+<tr>
+<th>(Intercept)</th><th>cyl</th><th>hp</th><th>wt</th><th>drat</th>
+</tr>
+<tr>
+<td>7.441</td><td>0.635</td>
+<td>0.013</td><td>0.8182</td><td>1.3868</td>
+</tr>
+</table>  
 
 ### Coefficients: 
 <table>
@@ -87,9 +103,7 @@ type:illustration
 <td>-0.0209</td><td>-2.9733</td><td>0.8177</td>
 </tr>
 </table>  
-<small>Joe in the Service Department says that horsepower is the biggest predictor for mpg, but Scott insist that weight is the most influential predictor and the coefficiences seem to prove that.  
-
-Residuals appear to be biased and heteroscedastic.  Not exactly what we want, but close enough for our application.
+<small>The Service Department claims that horsepower is the biggest predictor for mpg, but the model shows that weight is the most influential predictor. Since many of our customers are collectors, I don't think this hurt sales. 
 </small>
 
 Conclusion
@@ -97,10 +111,17 @@ Conclusion
 type:conclude
 
 
-<small>70s AutoMotors is a progressive company that is looking to utilize advance techniques to serve our customers.  If you would like more information about this application, please see Scott in the Parts Department.</small>    
+<small>70s AutoMotors is a progressive company that is looking to utilize advance techniques to serve our customers.  If you would like more information about this application, please see Scott in the Parts Department.
+
+Predicting miles per gallon for our customers is just a starting point.  We plan to use this technology to evaluate internal processes to determine better purchasing methods, customer service approaches and promotional analysis.
+</small>    
+
+
+[Go to the Application](http://rsrobinett.shinyapps.io/devDataProducts)
+
+***
+
+![alt text](lincoln.jpg)  
 
 Please take a look, and be prepared to offer your input at the staff meeting on Friday, December 12 at 9:30am in the conference room (coffee and bagels will be served).  
 
-[Go to the Application](http://rsrobinett.shinyapps.io/devDataProducts)
-***
-![alt text](lincoln.jpg)
