@@ -32,21 +32,7 @@ shinyUI(pageWithSidebar(
                   min = min(dataset$drat), 
                   max = max(dataset$drat), 
                   value = mean(dataset$drat), step = .2),
-    
-    sliderInput('gear', 'Number of Gears', 
-                min = min(dataset$gear), 
-                max = max(dataset$gear), 
-                value = mean(dataset$gear)),
-    
-    sliderInput('carb', 'Number of Carburators', 
-                min = min(dataset$carb), 
-                max = max(dataset$carb), 
-                value = mean(dataset$carb)),
-    
-    sliderInput('disp', 'Engine Displacement', 
-                min = min(dataset$disp), 
-                max = max(dataset$disp), 
-                value = mean(dataset$disp)),
+
     tags$br(),
     tags$br()
     

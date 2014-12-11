@@ -15,7 +15,9 @@ date: December 12, 2014
 
 ***
 
-At 70s AutoMotors we are continuely searching for better ways to serve our valuable customers.  The MPG Explorer &copy; implements a simple linear regression model that allows users to find a vehicle that best matches their MPG requirements.  
+At 70s AutoMotors we are continuely searching for better ways to serve our valuable customers.  The MPG Explorer &copy; implements a simple <strike>linear regression</strike> Random Forest model that allows users to find a vehicle that best matches their MPG requirements.  
+
+Random Forest is a statistical model that uses decision tree algorithms and randomized node optimization to train data. 
 
 
 <span style="font-size:22px;font-style: italic;">MPG Explorer &copy; 2014</span>
@@ -30,19 +32,16 @@ type: intro
 
 [Click here to Go to the Application](http://rsrobinett.shinyapps.io/devDataProducts)  
 ***
+<small>First, select number of cylinders from the dropdown.
+Then, using the sliders in the left panel, Select:  
+* Horsepower  
+* Weight  
+* Rear Gear Ratio  
+* Number of Gears  
+* Number of Carburators  
+* Engine Displacement  
 
-
-
-Using the sliders in the left panel. 
-
-* Select number of cylinders
-* Select horsepower
-* Select weight
-* Select rear gear ratio  
-
-See the predicted mpg and a recommendation.  
-
-See the predicted value in the plot in relation to the other vehicles.  
+Observe the predicted mpg and a recommendation from our inventory at the top, and the really cool plot that shows the predicted value in relation to the other vehicles.</small>  
 * It's just that easy!!
 
 
@@ -52,23 +51,21 @@ How it works
 ========================================================
 type:analysis
 
-The linear regression model uses the vehicles in stock (__mtcars__) as the dataset.  *mpg* is the dependent variable (the thing we are predicting); number of cylinders, horsepower, weight and rear drive gear are used as the predictors.   
+The random forest model uses the vehicles in stock (__mtcars__) as the dataset.  *mpg* is the dependent variable (the thing we are predicting); number of cylinders, horsepower, weight and rear drive gear ratio, number of forward gears, engine displacement, number of carburators  are used as the predictors.   
 
-* **lm1 <- lm(mpg~as.numeric(cyl)+hp+wt+drat, data=dataset)**   
+* **lm1 <- randomForest(mpg~as.numeric(cyl)+hp+wt+drat+disp+gear+carb,data=dataset)**   
 
 _values are derived from the slider input_
-* **pred <- data.frame(cyl=input$cyl,hp=input$hp,wt=input$wt,drat=input$drat)**    
+* **pred <- data.frame(cyl=input$cyl,hp=input$hp,wt=input$wt,drat=input$drat,
+disp=input$disp,gear=input$gear,carb=input$carb)**    
 
 _prediction is created with the predict function_ 
 * **prd <- predict(lm1, pred, interval="confidence")**  
 
-Since this is a prototype, we have intentionally keep this simple and have already found confidence levels to be too wide.  
 
 
-```
-    fit   lwr   upr
-1 23.81 21.33 26.29
-```
+Since this is a prototype, we have intentionally keep this simple and have already found the fit is not quite what we want with a _RSQ of 0.8406_, but in our defense, this is a very small dataset. Once we add inventory we expect better results.
+
 
 
 Evaluation of the model
@@ -88,8 +85,8 @@ type:illustration
 <th>(Intercept)</th><th>cyl</th><th>hp</th><th>wt</th><th>drat</th>
 </tr>
 <tr>
-<td>7.441</td><td>0.635</td>
-<td>0.013</td><td>0.8182</td><td>1.3868</td>
+<td>11.2072</td><td>0.8795</td>
+<td>0.0208</td><td>1.6068</td><td>1.6207</td>
 </tr>
 </table>  
 
@@ -99,11 +96,11 @@ type:illustration
 <th>(Intercept)</th><th>cyl</th><th>hp</th><th>wt</th><th>drat</th>
 </tr>
 <tr>
-<td>34.4959</td><td>-0.7623</td>
-<td>-0.0209</td><td>-2.9733</td><td>0.8177</td>
+<td>30.8058</td><td>-0.7188</td>
+<td>-0.0209</td><td>-2.513</td><td>0.7378</td>
 </tr>
 </table>  
-<small>The Service Department claims that horsepower is the biggest predictor for mpg, but the model shows that weight is the most influential predictor. Since many of our customers are collectors, I don't think this hurt sales. 
+<small>The Service Department claims that horsepower is the biggest predictor for mpg, but the coefficences show that weight has the largest negative effect to mpg. Since many of our best models are the heaviest, we are aware of the implications, but don't think this will hurt sales, as many collectors like to brag about the bad mileage. 
 </small>
 
 Conclusion
