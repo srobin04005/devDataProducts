@@ -1,10 +1,10 @@
 Title: MPG Explorer
 Description: Uses simple randomForest model to predict gas mileage from the mtcars dataset
 Version: Version 1
-Author, R. Scott Robinett
+Author: R. Scott Robinett
 Maintainer: srobin04005@gmail.com
 License: MIT
 Depends: datasets, randomForest, ggplot2
 Suggests: none
 Date: 2014-12-12
-URL: 
+
