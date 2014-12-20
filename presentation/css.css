@@ -7,7 +7,9 @@
   font-size: 18px;
   background: black;
   }
-
+.illustration .reveal p{
+  font-size: 30px;
+  }
 .intro .reveal .state-background {
   
   
@@ -29,7 +31,10 @@
 .analysis .reveal h2,
 .analysis .reveal h3,
 .analysis .reveal p {
-  color: black;
+  font-size: 30px; color: black;
+}
+.analysis .reveal li {
+  font-size: 22px; color: blue;
 }
 
 .reveal table {
