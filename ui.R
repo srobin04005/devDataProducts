@@ -3,7 +3,7 @@
 library(shiny)
 library(ggplot2)
 library(car)
-
+library(randomForest)
 
 shinyUI(pageWithSidebar(
   
@@ -14,25 +14,46 @@ shinyUI(pageWithSidebar(
     img(src="datsun710.jpg", height = 200, width = 220),
     br(),
     br(),
-    #sliderInput('sampleSize', 'Sample Size', min=1, max=nrow(dataset),
-    #    value=min(10, nrow(dataset)), step=5, round=0),
+    selectInput('formula', 'Formula', 
+                choices = c('linear', 'randomForest')),
+    selectInput('cyl', 'Cylinders', 
+                choices=c(4,6,8)),
     
-    sliderInput('cyl', 'Cylinders', 
-                min = 4,max = 8,value = 6,step = 2),
-    sliderInput('hp', 'HorsePower', 
-                min = min(mtcars$hp), max = max(mtcars$hp), 
-                value= 175,step=20 ),
+    sliderInput('hp','HorsePower', 
+                min = min(dataset$hp), 
+                max = max(dataset$hp), 
+                value = mean(dataset$hp), step=20),
+    
     sliderInput('wt', 'Weight (1000)', 
-                min = min(mtcars$wt), max = max(mtcars$wt), 
-                value=3.44, step = .2),
+                min = min(dataset$wt), 
+                max = max(dataset$wt), 
+                value = mean(dataset$wt), step = .2),
+    
     sliderInput('drat', 'Rear Gear Ratio', 
-                min = min(mtcars$drat), max = max(mtcars$drat), 
-                value=4.5, step = .2),
+                min = min(dataset$drat), 
+                max = max(dataset$drat), 
+                value = mean(dataset$drat), step = .2),
+    
+    sliderInput('gear', 'Number of Gears', 
+                min = min(dataset$gear), 
+                max = max(dataset$gear), 
+                value = mean(dataset$gear)),
+    
+    sliderInput('carb', 'Number of Carburators', 
+                min = min(dataset$carb), 
+                max = max(dataset$carb), 
+                value = mean(dataset$carb)),
+    
+    sliderInput('disp', 'Engine Displacement', 
+                min = min(dataset$disp), 
+                max = max(dataset$disp), 
+                value = mean(dataset$disp)),
     tags$br(),
     tags$br()
     
     
   ),
+  
   
   mainPanel(
     h3(textOutput('mytext')),
