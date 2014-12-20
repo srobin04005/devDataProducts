@@ -64,7 +64,7 @@ _prediction is created with the predict function_
 
 
 
-Since this is a prototype, we have intentionally keep this simple and have already found the fit is not quite what we want with a _RSQ of 0.8406_, but in our defense, this is a very small dataset. Once we add inventory we expect better results.
+Since this is a prototype, we have intentionally keep this simple and have already found the fit is not quite what we want with a _RSQ of 0.8191_, but in our defense, this is a very small dataset. Once we add inventory we expect better results.
 
 
 
